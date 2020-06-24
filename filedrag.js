@@ -15,6 +15,7 @@ var hintColor=['#007bff','#6c757d','#28a745','#dc3545'];
 var outputjson =  {"packageName":0, "filename":0,"mask":[]};
 var hintIndex;
 var sharpCount=0;
+var clickable=false;
 function setHintType(e){
 	hintIndex=e;
 	hintType=hintColor[e];
@@ -67,7 +68,17 @@ function setPackageName(str){
 			console.log("Shape changed to "+shapeType);
 		  });
 	  }
-
+	  var rad2 = document.uploadform.clickable;
+	  for (var i = 0; i < rad2.length; i++) {
+		rad2[i].addEventListener('change', function() {
+			clickable=parseInt(this.value);
+			refRect=canvas.getActiveObject();
+			if(refRect!=null){
+				outputjson.mask[refRect.id]["clickable"]=clickable;
+			}
+			console.log("clickable changed to "+clickable);
+		  });
+	  }
 
 	canvas.on('mouse:down', function(o){
 		if(!isDown && isCreateMode){  
@@ -148,7 +159,7 @@ function setPackageName(str){
 				widthrx=rect.width;
 				heightry=rect.height;
 			}
-			var shapejson = {"shapeType":shapeType, "hintIndex":hintIndex, "left":rect.left.toPrecision(5), "top":rect.top.toPrecision(5), "widthrx":widthrx,"heightry": heightry}; 
+			var shapejson = {"shapeType":shapeType, "hintIndex":hintIndex, "clickable":clickable, "left":rect.left.toPrecision(5), "top":rect.top.toPrecision(5), "widthrx":widthrx,"heightry": heightry}; 
 			outputjson.mask.push(shapejson);
 		} else{ 
 			refRect=canvas.getActiveObject();
