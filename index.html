@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Coaching Screen Marker</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="fabric.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="styles.css" />
+</head>
+<body> 
+ <form id="uploadform" name="uploadform" action="index.html" method="POST" enctype="multipart/form-data"> 
+ <div class="leftside"> 
+<fieldset>
+<legend>Screenshot File Upload</legend>
+
+<input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" />
+
+<div>
+	<label for="fileselect">Files to upload:</label>
+	<input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
+	<div id="filedrag">or drop files here</div>
+</div>
+
+<div id="submitbutton">
+	<button type="submit">Upload Files</button>
+</div>
+
+</fieldset>
+
+
+
+<div id="messages">
+</div>
+</div>
+<div class="rightside">
+<p>
+	Please Input App Package Name:
+	<input type="text" class="form-control" placeholder="APP Package Name" name="packagename" id="packagename" onchange="setPackageName(this.value)" >
+</p> 
+<button type="button" class="btn btn-primary" onclick="setHintType(0)">Multi-Step guide</button>
+<button type="button" class="btn btn-secondary" onclick="setHintType(1)">Text hints</button> 
+<button type="button" class="btn btn-success" onclick="setHintType(2)">Graph hints</button> 
+<button type="button" class="btn btn-danger" onclick="setHintType(3)">Animation guide</button> 
+<div class="form-check form-check-inline">
+	<input class="form-check-input" type="radio" name="maskShapeOptions" id="inlineRadio1" value="0">
+	<label class="form-check-label" for="inlineRadio1">Circle</label>
+  </div>
+  <div class="form-check form-check-inline">
+	<input class="form-check-input" type="radio" name="maskShapeOptions" id="inlineRadio2" value="1" checked>
+	<label class="form-check-label" for="inlineRadio2">Rectangle</label>
+  </div>
+  <button id="delete" type="button" class="btn btn-danger" >Delete</button>  
+<canvas id="c"></canvas>
+</div>
+<pre id="outputjson">
+	
+</pre>
+<button type="button" class="btn btn-success" onclick="downloadObjectAsJson()">Download JSON</button>
+
+</form>
+<h2>Disclaimer</h2>
+<p>The code was developed by <a href="">Symlab HKUST</a>.</p>
+ 
+<script src="filedrag.js"></script>
+</body>
+</html>
