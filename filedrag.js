@@ -199,7 +199,7 @@ function setPackageName(str){
 		var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(outputjson));
 		var downloadAnchorNode = document.createElement('a');
 		downloadAnchorNode.setAttribute("href",     dataStr);
-		downloadAnchorNode.setAttribute("download", outputjson["packageName"] + ".json");
+		downloadAnchorNode.setAttribute("download", outputjson["filename"] + ".json");
 		document.body.appendChild(downloadAnchorNode); // required for firefox
 		downloadAnchorNode.click();
 		downloadAnchorNode.remove();
