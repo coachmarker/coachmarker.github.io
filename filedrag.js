@@ -11,11 +11,12 @@ var canvas = this.__canvas = new fabric.Canvas('c', {
   var refRect;
 var rect, isDown, origX, origY, hintType, shapeType=1; 
 var isCreateMode=false;
-var hintColor=['#007bff','#6c757d','#28a745','#dc3545'];
+var hintColor=['#007bff','#6c757d','#28a745','#dc3545', '#ac1511'];
 var outputjson =  {"packageName":0, "filename":0,"mask":[]};
 var hintIndex;
 var sharpCount=0;
 var clickable=false;
+var bgImg;
 function setHintType(e){
 	hintIndex=e;
 	hintType=hintColor[e];
@@ -23,7 +24,7 @@ function setHintType(e){
 	
 }
 function printJson(){
-	$("#outputjson").text( JSON.stringify(outputjson)); 
+	$("#outputjson").text( JSON.stringify(outputjson,null,4)); 
 }
 function setPackageName(str){
 	outputjson["packageName"]=str;
@@ -194,17 +195,30 @@ function setPackageName(str){
 		var m = $id("messages");
 		m.innerHTML = msg + m.innerHTML;
 	}
-
+	
 	function downloadObjectAsJson(){
-		var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(outputjson));
+		var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(outputjson, null, 4));
 		var downloadAnchorNode = document.createElement('a');
 		downloadAnchorNode.setAttribute("href",     dataStr);
-		downloadAnchorNode.setAttribute("download", outputjson["packageName"] + ".json");
+		downloadAnchorNode.setAttribute("download", outputjson["filename"] + ".json");
 		document.body.appendChild(downloadAnchorNode); // required for firefox
 		downloadAnchorNode.click();
 		downloadAnchorNode.remove();
+
 	}
 
+	function downloadSvg(){
+		canvas.backgroundImage=0;  
+		var canvasSVG = canvas.toSVG();
+		var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent( );
+		var downloadAnchorNode = document.createElement('a');
+		downloadAnchorNode.setAttribute("href",     dataStr);
+		downloadAnchorNode.setAttribute("download", outputjson["packageName"] + ".svg");
+		document.body.appendChild(downloadAnchorNode); // required for firefox
+		downloadAnchorNode.click(); 
+		downloadAnchorNode.remove();
+		canvas.setBackgroundImage(bgImg, canvas.renderAll.bind(canvas));
+	}
 	// file drag hover
 	function FileDragHover(e) {
 		e.stopPropagation();
@@ -241,8 +255,8 @@ function setPackageName(str){
 			reader.onload = function (f) {
 			  var data = f.target.result;                    
 			  fabric.Image.fromURL(data, function (img) {
-				var oImg = img.set({left: 0, top: 0, angle: 00,width:img.width, height:img.height});
-				canvas.setBackgroundImage(oImg, canvas.renderAll.bind(canvas));
+				bgImg = img.set({left: 0, top: 0, angle: 00,width:img.width, height:img.height});
+				canvas.setBackgroundImage(bgImg, canvas.renderAll.bind(canvas));
 				canvas.setWidth(img.width);
 				canvas.setHeight(img.height);
 			  });
