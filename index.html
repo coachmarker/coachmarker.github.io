@@ -43,9 +43,16 @@
 </p> 
 <button type="button" class="btn btn-primary" onclick="setHintType(0)">Multi-Step guide</button>
 <button type="button" class="btn btn-secondary" onclick="setHintType(1)">Text hints</button> 
-<button type="button" class="btn btn-success" onclick="setHintType(2)">Graph hints</button> 
-<button type="button" class="btn btn-danger" onclick="setHintType(3)">Animation guide</button> 
-<button type="button" class="btn btn-warning" onclick="setHintType(4)">Mask</button> 
+<button type="button" class="btn btn-success" onclick="setHintType(2)">Talking box/Text box</button> 
+<button type="button" class="btn btn-danger" onclick="setHintType(3)">Stage Transition Button</button> 
+<button type="button" class="btn btn-warning" onclick="setHintType(4)">Confirmation Button</button> 
+<button type="button" class="btn btn-info" onclick="setHintType(5)">Highlight</button> 
+<button type="button" class="btn btn-light" onclick="setHintType(6)">Mask</button> 
+<button type="button" class="btn btn-dark" onclick="setHintType(7)">Arrow</button> 
+<button type="button" class="btn btn-secondary" onclick="setHintType(8)">Virtual Hand</button> 
+<button type="button" class="btn btn-success" onclick="setHintType(9)">Demo Animation/Video</button> 
+<button type="button" class="btn btn-primary" onclick="setHintType(10)">Static Image</button> 
+
 <div class="form-check form-check-inline">
 	<input class="form-check-input" type="radio" name="maskShapeOptions" id="inlineRadio1" value="0">
 	<label class="form-check-label" for="inlineRadio1">Circle</label>
@@ -53,19 +60,23 @@
   <div class="form-check form-check-inline">
 	<input class="form-check-input" type="radio" name="maskShapeOptions" id="inlineRadio2" value="1" checked>
 	<label class="form-check-label" for="inlineRadio2">Rectangle</label>
+
+	
   </div>
-  <button id="delete" type="button" class="btn btn-danger" >Delete</button>  
-  
-  <div>
-<div class="form-check form-check-inline">
-	<input class="form-check-input" type="radio" name="clickable" id="clickable1" value="0">
-	<label class="form-check-label" for="clickable1">Clickable</label>
-  </div>
-  <div class="form-check form-check-inline">
-	<input class="form-check-input" type="radio" name="clickable" id="clickable2" value="1" >
-	<label class="form-check-label" for="clickable2">Static</label>
-  </div>
-</div>
+ 
+ 
+<div>
+	<div class="form-check form-check-inline">
+		<input class="form-check-input" type="radio" name="clickable" id="clickable1" value="0">
+		<label class="form-check-label" for="clickable1">Clickable</label>
+	</div>
+	<div class="form-check form-check-inline">
+		<input class="form-check-input" type="radio" name="clickable" id="clickable2" value="1" >
+		<label class="form-check-label" for="clickable2">Static</label>
+	</div>
+	<input type="text" class="form-control" id="vgtext" name="vgtext" placeholder="The text content in this UI" >
+	<button id="delete" type="button" class="btn btn-danger" >Delete</button>  
+</div> 
 <canvas id="c"></canvas>
 </div>
 <pre id="outputjson">

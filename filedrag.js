@@ -11,7 +11,7 @@ var canvas = this.__canvas = new fabric.Canvas('c', {
   var refRect;
 var rect, isDown, origX, origY, hintType, shapeType=1; 
 var isCreateMode=false;
-var hintColor=['#007bff','#6c757d','#28a745','#dc3545', '#ac1511'];
+var hintColor=['#007bff','#6c757d','#28a745','#dc3545', '#ac1511', '#17a2b8', '#343a40','#212529','#343a40','#6c757d','#28a745','#007bff'];
 var outputjson =  {"packageName":0, "filename":0,"mask":[]};
 var hintIndex;
 var sharpCount=0;
@@ -80,6 +80,16 @@ function setPackageName(str){
 			console.log("clickable changed to "+clickable);
 		  });
 	  }
+	var vgtext= document.uploadform.vgtext;
+	vgtext.addEventListener('change', function() { 
+		refRect=canvas.getActiveObject();
+		if(refRect!=null && outputjson.mask[refRect.id]["hintIndex"]>=1 &&  outputjson.mask[refRect.id]["hintIndex"]<=4){
+			outputjson.mask[refRect.id]["text"]=this.value; 
+			var tlength=this.value.split(" ").length
+			outputjson.mask[refRect.id]["textlength"]=tlength;
+		}
+		console.log("text changed to "+this.value);
+	  });
 
 	canvas.on('mouse:down', function(o){
 		if(!isDown && isCreateMode){  
@@ -227,7 +237,7 @@ function setPackageName(str){
 	} 
 	// file selection
 	function FileSelectHandler(e) {
-
+		
 		// cancel event and hover styling
 		FileDragHover(e);
 
