@@ -78,6 +78,7 @@ function setPackageName(str){
 				outputjson.mask[refRect.id]["clickable"]=clickable;
 			}
 			console.log("clickable changed to "+clickable);
+			printJson();
 		  });
 	  }
 	var vgtext= document.uploadform.vgtext;
@@ -89,6 +90,7 @@ function setPackageName(str){
 			outputjson.mask[refRect.id]["textlength"]=tlength;
 		}
 		console.log("text changed to "+this.value);
+		printJson();
 	  });
 
 	canvas.on('mouse:down', function(o){
@@ -151,6 +153,7 @@ function setPackageName(str){
 			break; 
 		}  
 		canvas.renderAll();
+		printJson();
 	});
 	canvas.on("selection:created", function(obj){ 
 
